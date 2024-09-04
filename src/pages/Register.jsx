@@ -1,6 +1,5 @@
 import React, { useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
-import api from '../utils/Axios'
 import axios from 'axios'
 
 function Register() {

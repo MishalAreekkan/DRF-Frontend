@@ -10,12 +10,10 @@ function AuthProvider({ children }) {
     const [authToken, setAuthToken] = useState(() =>
         localStorage.getItem('authToken') ? JSON.parse(localStorage.getItem('authToken')) : null
 );
-console.log(authToken,'aaaaaaauthhhhhhh');  
     
     const [user, setUser] = useState(() =>
         localStorage.getItem('authToken') ? jwtDecode(localStorage.getItem('authToken')) : null
 );
-console.log(user,"user decode");
 
 const navigate = useNavigate();
 

@@ -2,8 +2,11 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { Dialog, DialogPanel, DialogTitle, DialogBackdrop } from '@headlessui/react';
 import { ExclamationTriangleIcon } from '@heroicons/react/24/outline';
+import { useNavigate } from 'react-router-dom';
+
 
 function Home() {
+    const nav = useNavigate()
     const [listdata, setListdata] = useState([]);
     const [open, setOpen] = useState(false);
     const [selectedId, setSelectedId] = useState(null);
@@ -18,6 +21,8 @@ function Home() {
         try {
             const response = await axios.get('http://127.0.0.1:8000/list');
             setListdata(response.data);
+            console.log(response.headers, 'hhhhhhhhhhhhhhh');
+
             console.log('listing:', response.data);
         } catch (error) {
             console.error('Error fetching list data:', error);
@@ -81,30 +86,64 @@ function Home() {
         <>
             <div>
                 <h1>Home Page</h1>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Email</th>
-                            <th>Username</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {listdata?.map((i) => (
-                            <tr key={i.id}>
-                                <td>{i.id}</td>
-                                <td>{i.email}</td>
-                                <td>{i.first_name}</td>
-                                <td>
-                                    <button >Edit</button>
-                                </td>
-                                <td>
-                                    <button onClick={() => openModal(i.id)}>Delete</button>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
+                <div className="flex justify-center items-center min-h-screen">
+  <table className="w-full max-w-md mx-auto text-sm text-left text-gray-500 dark:text-gray-400">
+    <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+      <tr>
+        <th scope="col" className="px-6 py-3">
+          Id
+        </th>
+        <th scope="col" className="px-6 py-3">
+          Name
+        </th>
+        <th scope="col" className="px-6 py-3">
+          Email
+        </th>
+        <th scope="col" className="px-6 py-3">
+          Edit
+        </th>
+        <th scope="col" className="px-6 py-3">
+          Delete
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      {listdata?.map((i) => (
+        <tr key={i.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+          <th
+            scope="row"
+            className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+          >
+            {i.id}
+          </th>
+          <td className="px-6 py-4">
+            {i.first_name}
+          </td>
+          <td className="px-6 py-4">
+            {i.email}
+          </td>
+          <td className="px-6 py-4">
+            <button
+              onClick={() => nav(`/update/${i.id}`)}
+              className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+            >
+              Edit
+            </button>
+          </td>
+          <td className="px-6 py-4">
+            <button
+              onClick={() => openModal(i.id)}
+              className="font-medium text-red-600 dark:text-red-500 hover:underline"
+            >
+              Delete
+            </button>
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+
             </div>
             <div>
                 <form onSubmit={handleSubmit}>
@@ -143,6 +182,11 @@ function Home() {
                     <button type="submit">Sign in</button>
                 </form>
             </div>
+
+            <div>
+
+            </div>
+
 
             <Dialog open={open} onClose={() => setOpen(false)} className="relative z-10">
                 <DialogBackdrop
@@ -188,7 +232,37 @@ function Home() {
                     </div>
                 </div>
             </Dialog>
+
         </>
     );
 }
 export default Home;
+
+
+
+
+
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+
+        <tbody>
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    Apple MacBook Pro 17"
+                </th>
+                <td class="px-6 py-4">
+                    Silver
+                </td>
+                <td class="px-6 py-4">
+                    Laptop
+                </td>
+                <td class="px-6 py-4">
+                    $2999
+                </td>
+                <td class="px-6 py-4">
+                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
