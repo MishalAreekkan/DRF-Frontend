@@ -57,7 +57,7 @@ function Home() {
                 password2: ''
             });
             Listing();
-        } catch (error) {
+        } catch (error) { 
             console.error('Error during registration:', error);
             alert('An error occurred during registration. Please try again.');
         }
