@@ -27,7 +27,6 @@ const loginUser = async (e) => {
             if (response.status === 200) {
                 const data = response.data;
                 console.log(data,"dataaaaaaaaaaa");
-                
                 setAuthToken(data.access);
                 setUser(jwtDecode(data.access));
                 localStorage.setItem('authToken', JSON.stringify(data.access));
@@ -48,7 +47,6 @@ const loginUser = async (e) => {
 
     const updateToken = async () => {
         console.log('Updating token...');
-
         try {
             const response = await axios.post('http://127.0.0.1:8000/login/', {
                 refresh: authToken.refresh,
@@ -73,13 +71,11 @@ const loginUser = async (e) => {
         console.log('User logged out:', user);
         console.log('Auth token removed:', authToken);
     };
-
-    // Automatically refresh the token at intervals or on page reload
     useEffect(() => {
         if (authToken) {
             const interval = setInterval(() => {
                 updateToken();
-            }, 1000 * 60 * 4); // Update token every 4 minutes
+            }, 1000 * 60 * 4);
 
             return () => clearInterval(interval);
         }

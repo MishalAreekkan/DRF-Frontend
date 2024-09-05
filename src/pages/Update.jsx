@@ -8,7 +8,7 @@ function Update() {
   const [form, setForm] = useState({
     first_name: '',
     email: '',
-    image:null
+    image: null
   });
   const { id } = useParams();
 
@@ -20,7 +20,7 @@ function Update() {
         first_name: response.data.first_name || '',
         email: response.data.email || '',
         image: response.data.image || '',
-      
+
 
       });
     } catch (error) {
@@ -72,37 +72,57 @@ function Update() {
 
   return (
     <>
-      <h1>Update Employee</h1>
-      <div>
-        <form onSubmit={handleSubmit}>
-          <input
-            class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-            type="text"
-            placeholder="First Name"
-            name="first_name"
-            value={form.first_name}
-            onChange={handleChange}
-            required
-          />
-          <input
-          class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-            type="email"
-            placeholder="Email"
-            name="email"
-            value={form.email}
-            onChange={handleChange}
-            required
-          />
-          <input
-            className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-            type="file"
-            name="image"
-            onChange={handleChange}  // Handle file change
-          />
-          <button 
-          type="submit">Update</button>
+      <div className="flex justify-center items-center min-h-screen bg-gray-50">
+        <form
+          onSubmit={handleSubmit}
+          className="w-full max-w-md bg-white p-8 rounded-lg shadow-lg"
+        >
+          <h2 className="text-2xl font-semibold text-gray-800 mb-6 text-center">
+            Update Profile
+          </h2>
+
+          <div className="mb-4">
+            <input
+              className="w-full rounded-md border border-gray-300 bg-white py-3 px-4 text-base text-gray-700 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
+              type="text"
+              placeholder="First Name"
+              name="first_name"
+              value={form.first_name}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className="mb-4">
+            <input
+              className="w-full rounded-md border border-gray-300 bg-white py-3 px-4 text-base text-gray-700 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
+              type="email"
+              placeholder="Email"
+              name="email"
+              value={form.email}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className="mb-6">
+            <input
+              className="w-full rounded-md border border-gray-300 bg-white py-3 px-4 text-base text-gray-700 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
+              type="file"
+              name="image"
+              onChange={handleChange}
+            />
+          </div>
+
+          <button
+            type="submit"
+            className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition duration-300"
+          >
+            Update
+          </button>
         </form>
       </div>
+
     </>
   );
 }

@@ -1,25 +1,37 @@
 import React, { useContext } from 'react'
 import { AuthContext } from '../Context/AuthProvider'
+import { Link } from 'react-router-dom'
 
 
 function Headers() {
-  const { logoutUser } = useContext(AuthContext)
+  const { logoutUser,user } = useContext(AuthContext)
   return (
     <div>
-      <nav class="bg-gray-800
-                py-4 text-white fixed 
-                w-full top-0 left-0">
-        <div class="container mx-auto">
-          <ul class="ml-8 space-x-4">
-            <li class="inline-block">
-              Home
-            </li>
-            <li class="inline-block">
-              <button onClick={logoutUser}>LogOut</button>
-            </li>
-          </ul>
-        </div>
-      </nav>
+        <header className="bg-gray-800 text-white p-4 shadow-md">
+            <div className="container mx-auto flex items-center justify-between">
+                <Link to='home' className="text-xl font-bold hover:text-gray-400">Home</Link>
+                <div className="flex items-center space-x-4">
+                    {user ? (
+                        <>
+                            <button
+                                onClick={logoutUser}
+                                className="text-lg hover:text-gray-400 focus:outline-none"
+                            >
+                                LogOut
+                            </button>
+                            <h2 className="text-lg">Hello, {user.username}</h2>
+                        </>
+                    ) : (
+                        <Link
+                            to='login'
+                            className="text-lg hover:text-gray-400"
+                        >
+                            Login
+                        </Link>
+                    )}
+                </div>
+            </div>
+        </header>
     </div>
   )
 }

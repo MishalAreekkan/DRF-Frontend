@@ -85,108 +85,149 @@ function Home() {
     return (
         <>
             <div>
-                <h1>Home Page</h1>
-                <div className="flex justify-center items-center min-h-screen">
-  <table className="w-full max-w-md mx-auto text-sm text-left text-gray-500 dark:text-gray-400">
-    <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-      <tr>
-        <th scope="col" className="px-6 py-3">
-          Id
-        </th>
-        <th scope="col" className="px-6 py-3">
-          Name
-        </th>
-        <th scope="col" className="px-6 py-3">
-          Email
-        </th>
-        <th scope="col" className="px-6 py-3">
-          Edit
-        </th>
-        <th scope="col" className="px-6 py-3">
-          Delete
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      {listdata?.map((i) => (
-        <tr key={i.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-          <th
-            scope="row"
-            className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-          >
-            {i.id}
-          </th>
-          <td className="px-6 py-4">
-            {i.first_name}
-          </td>
-          <td className="px-6 py-4">
-            {i.email}
-          </td>
-          <td className="px-6 py-4">
-            <button
-              onClick={() => nav(`/update/${i.id}`)}
-              className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-            >
-              Edit
-            </button>
-          </td>
-          <td className="px-6 py-4">
-            <button
-              onClick={() => openModal(i.id)}
-              className="font-medium text-red-600 dark:text-red-500 hover:underline"
-            >
-              Delete
-            </button>
-          </td>
-        </tr>
-      ))}
-    </tbody>
-  </table>
+                <div className="flex mt-10 justify-center items-center ">
+                    <table className="w-full max-w-md mx-auto text-sm text-left text-gray-500 dark:text-gray-400">
+                        <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                            <tr>
+                                <th scope="col" className="px-6 py-3">
+                                    Id
+                                </th>
+                                <th scope="col" className="px-6 py-3">
+                                    Name
+                                </th>
+                                <th scope="col" className="px-6 py-3">
+                                    Email
+                                </th>
+                                <th scope="col" className="px-6 py-3">
+                                    Edit
+                                </th>
+                                <th scope="col" className="px-6 py-3">
+                                    Delete
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {listdata?.map((i) => (
+                                <tr key={i.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                    <th
+                                        scope="row"
+                                        className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                                    >
+                                        {i.id}
+                                    </th>
+                                    <td className="px-6 py-4">
+                                        {i.first_name}
+                                    </td>
+                                    <td className="px-6 py-4">
+                                        {i.email}
+                                    </td>
+                                    <td className="px-6 py-4">
+                                        <button
+                                            onClick={() => nav(`/update/${i.id}`)}
+                                            className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                                        >
+                                            Edit
+                                        </button>
+                                    </td>
+                                    <td className="px-6 py-4">
+                                        <button
+                                            onClick={() => openModal(i.id)}
+                                            className="font-medium text-red-600 dark:text-red-500 hover:underline"
+                                        >
+                                            Delete
+                                        </button>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+
+      <div className="flex mt-14 justify-center items-center ">
+  <form onSubmit={handleSubmit} className="max-w-md w-full bg-white p-6 rounded-lg shadow-md">
+    <div className="relative z-0 w-full mb-5 group ">
+      <input
+        type="text"
+        name="firstname"
+        value={form.firstname}
+        onChange={handleChange}
+        className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+        placeholder=" "
+        required
+      />
+      <label
+        htmlFor="firstname"
+        className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+      >
+        First Name
+      </label>
+    </div>
+
+    <div className="relative z-0 w-full mb-5 group">
+      <input
+        type="email"
+        name="email"
+        value={form.email}
+        onChange={handleChange}
+        className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+        placeholder=" "
+        required
+      />
+      <label
+        htmlFor="email"
+        className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+      >
+        Email
+      </label>
+    </div>
+
+    <div className="relative z-0 w-full mb-5 group">
+      <input
+        type="password"
+        name="password"
+        value={form.password}
+        onChange={handleChange}
+        className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+        placeholder=" "
+        required
+      />
+      <label
+        htmlFor="password"
+        className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+      >
+        Password
+      </label>
+    </div>
+
+    <div className="relative z-0 w-full mb-5 group">
+      <input
+        type="password"
+        name="password2"
+        value={form.password2}
+        onChange={handleChange}
+        className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+        placeholder=" "
+        required
+      />
+      <label
+        htmlFor="password2"
+        className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+      >
+        Confirm Password
+      </label>
+    </div>
+
+    <button
+      type="submit"
+      className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+    >
+      Sign In
+    </button>
+  </form>
 </div>
-
-            </div>
-            <div>
-                <form onSubmit={handleSubmit}>
-                    <input
-                        type="text"
-                        placeholder="First Name"
-                        name="firstname"
-                        value={form.firstname}
-                        onChange={handleChange}
-                        required
-                    />
-                    <input
-                        type="email"
-                        placeholder="Email"
-                        name="email"
-                        value={form.email}
-                        onChange={handleChange}
-                        required
-                    />
-                    <input
-                        type="password"
-                        placeholder="Password"
-                        name="password"
-                        value={form.password}
-                        onChange={handleChange}
-                        required
-                    />
-                    <input
-                        type="password"
-                        placeholder="Confirm Password"
-                        name="password2"
-                        value={form.password2}
-                        onChange={handleChange}
-                        required
-                    />
-                    <button type="submit">Sign in</button>
-                </form>
-            </div>
-
-            <div>
-
-            </div>
-
 
             <Dialog open={open} onClose={() => setOpen(false)} className="relative z-10">
                 <DialogBackdrop
@@ -237,32 +278,3 @@ function Home() {
     );
 }
 export default Home;
-
-
-
-
-
-<div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-
-        <tbody>
-            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    Apple MacBook Pro 17"
-                </th>
-                <td class="px-6 py-4">
-                    Silver
-                </td>
-                <td class="px-6 py-4">
-                    Laptop
-                </td>
-                <td class="px-6 py-4">
-                    $2999
-                </td>
-                <td class="px-6 py-4">
-                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</div>
