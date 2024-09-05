@@ -15,12 +15,12 @@ function AuthProvider({ children }) {
         localStorage.getItem('authToken') ? jwtDecode(localStorage.getItem('authToken')) : null
 );
 
-const navigate = useNavigate();
+const nav = useNavigate();
 
 const loginUser = async (e) => {
     e.preventDefault()
     try {
-            const response = await axios.post('http://127.0.0.1:8000/login', {
+            const response = await axios.post('http://127.0.0.1:8000/login/', {
                 email: e.target.email.value,
                 password: e.target.password.value
             })
@@ -33,7 +33,12 @@ const loginUser = async (e) => {
                 localStorage.setItem('authToken', JSON.stringify(data.access));
                 localStorage.setItem('refreshToken', JSON.stringify(data.refresh));
                 toast.success('sucuess')
-                navigate('home');
+                if (jwtDecode(data.access).is_superuser){
+                    console.log(jwtDecode(data.access),'jjjjjjjjjjjjjjjjjjjjjj');   
+                    nav('home');
+                }else{
+                    nav('employee')
+                }
             }
         } catch (error) {
             console.error('Error during login:', error);
@@ -64,7 +69,7 @@ const loginUser = async (e) => {
         localStorage.removeItem('authToken');
         setAuthToken(null);
         setUser(null);
-        navigate('/login');
+        nav('/login');
         console.log('User logged out:', user);
         console.log('Auth token removed:', authToken);
     };

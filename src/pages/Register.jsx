@@ -7,7 +7,7 @@ function Register() {
   const nav = useNavigate()
   const registerApi =async(first_name,email,password,password2)=>{
     try{
-      const response = await axios.post(`http://127.0.0.1:8000/register`,{
+      const response = await axios.post(`http://127.0.0.1:8000/register/`,{
         first_name,email,password,password2
       })
       console.log('register_data:',response.data);
