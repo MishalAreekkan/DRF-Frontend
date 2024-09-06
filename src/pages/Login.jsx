@@ -3,14 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../Context/AuthProvider';
 
 function Login() {
-  const navigate = useNavigate();
+  const nav = useNavigate();
   const { loginUser, authToken, user } = useContext(AuthContext);
 
   return (
     <>
-      <h1>Login</h1>
       <div className="flex justify-center items-center min-h-screen">
-        <form onSubmit={loginUser} className="max-w-md w-full bg-white p-6 rounded-lg shadow-md">
+        <form onSubmit={loginUser} className="max-w-md w-full bg-white p-6 rounded-lg shadow-md flex flex-col space-y-4">
           <div className="relative z-0 w-full mb-5 group">
             <input
               type="email"
@@ -45,14 +44,24 @@ function Login() {
             </label>
           </div>
 
-          <button
-            type="submit"
-            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-          >
-            Login
-          </button>
+          <div className="flex justify-between">
+            <button
+              type="submit"
+              className="bg-black text-white hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center transition-colors duration-150"
+            >
+              Login
+            </button>
+            <button
+              onClick={() => nav('/')}
+              type="button"
+              className="bg-black text-white hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center transition-colors duration-150"
+            >
+              Register
+            </button>
+          </div>
         </form>
       </div>
+
     </>
   );
 }

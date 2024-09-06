@@ -9,33 +9,33 @@ const AuthContext = createContext();
 function AuthProvider({ children }) {
     const [authToken, setAuthToken] = useState(() =>
         localStorage.getItem('authToken') ? JSON.parse(localStorage.getItem('authToken')) : null
-);
-    
+    );
+
     const [user, setUser] = useState(() =>
         localStorage.getItem('authToken') ? jwtDecode(localStorage.getItem('authToken')) : null
-);
+    );
 
-const nav = useNavigate();
+    const nav = useNavigate();
 
-const loginUser = async (e) => {
-    e.preventDefault()
-    try {
+    const loginUser = async (e) => {
+        e.preventDefault()
+        try {
             const response = await axios.post('http://127.0.0.1:8000/login/', {
                 email: e.target.email.value,
                 password: e.target.password.value
             })
             if (response.status === 200) {
                 const data = response.data;
-                console.log(data,"dataaaaaaaaaaa");
+                console.log(data, "dataaaaaaaaaaa");
                 setAuthToken(data.access);
                 setUser(jwtDecode(data.access));
                 localStorage.setItem('authToken', JSON.stringify(data.access));
                 localStorage.setItem('refreshToken', JSON.stringify(data.refresh));
                 toast.success('sucuess')
-                if (jwtDecode(data.access).is_superuser){
-                    console.log(jwtDecode(data.access),'jjjjjjjjjjjjjjjjjjjjjj');   
+                if (jwtDecode(data.access).is_superuser) {
+                    console.log(jwtDecode(data.access), 'jjjjjjjjjjjjjjjjjjjjjj');
                     nav('home');
-                }else{
+                } else {
                     nav('employee')
                 }
             }

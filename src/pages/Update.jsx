@@ -20,8 +20,6 @@ function Update() {
         first_name: response.data.first_name || '',
         email: response.data.email || '',
         image: response.data.image || '',
-
-
       });
     } catch (error) {
       console.error('Error fetching list data:', error);
