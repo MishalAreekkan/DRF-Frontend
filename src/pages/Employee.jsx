@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 function Employee() {
   const baseUrl = "http://127.0.0.1:8000/"
@@ -63,9 +64,9 @@ function Employee() {
       console.log('Form submitted:', response.data);
       userprofile();
       setVisible(false);
+      toast.success('Successfully Updated')
     } catch (error) {
       console.error('Error during update:', error);
-      alert('An error occurred during the update. Please try again.');
     }
   };
 

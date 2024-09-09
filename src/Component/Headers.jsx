@@ -8,7 +8,7 @@ function Headers() {
   return (
     <header className="bg-[#020202] text-white p-4 shadow-md">
       <div className="container mx-auto flex items-center justify-between">
-        {user && (
+        {user && user.is_superuser && (
           <Link to='/home' className="text-xl font-bold hover:text-gray-400">
             Home
           </Link>

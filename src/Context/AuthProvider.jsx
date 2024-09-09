@@ -31,7 +31,7 @@ function AuthProvider({ children }) {
                 setUser(jwtDecode(data.access));
                 localStorage.setItem('authToken', JSON.stringify(data.access));
                 localStorage.setItem('refreshToken', JSON.stringify(data.refresh));
-                toast.success('sucuess')
+                toast.success('successfully logged in')
                 if (jwtDecode(data.access).is_superuser) {
                     console.log(jwtDecode(data.access), 'jjjjjjjjjjjjjjjjjjjjjj');
                     nav('home');
@@ -41,7 +41,7 @@ function AuthProvider({ children }) {
             }
         } catch (error) {
             console.error('Error during login:', error);
-            toast.error('An error occurred. Please try again.');
+            toast.error('Oops!.Please try again.');
         }
     };
 

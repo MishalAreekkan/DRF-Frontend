@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 function Update() {
   const nav = useNavigate()
@@ -62,9 +63,10 @@ function Update() {
       });
       console.log('Form submitted:', response.data);
       nav('/home')
+      toast.success('successfully Updated')
     } catch (error) {
       console.error('Error during registration:', error);
-      alert('An error occurred during registration. Please try again.');
+      toast.error("Sorry! Can't Updated")
     }
   };
 

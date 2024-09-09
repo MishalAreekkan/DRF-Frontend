@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Dialog, DialogPanel, DialogTitle, DialogBackdrop } from '@headlessui/react';
 import { ExclamationTriangleIcon } from '@heroicons/react/24/outline';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 
 function Home() {
@@ -51,7 +52,7 @@ function Home() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://127.0.0.1:8000/register', {
+            const response = await axios.post('http://127.0.0.1:8000/list/', {
                 first_name: form.firstname,
                 email: form.email,
                 password: form.password,
@@ -76,12 +77,12 @@ function Home() {
         if (selectedId === null) return;
         try {
             const response = await axios.delete(`http://127.0.0.1:8000/rud/${selectedId}/`);
-            console.log('User deleted successfully:', response.data);
             setOpen(false);
             setSelectedId(null);
             Listing();
+            toast.success("User deleted successfully")
         } catch (error) {
-            console.error("Can't delete:", error);
+            toast.success("Can't delete")
         }
     };
 
@@ -99,7 +100,7 @@ function Home() {
                         type="text"
                         value={searching}
                         onChange={handleSearch}
-                        placeholder="Search by first name..."
+                        placeholder="Search by name..."
                         className="block w-full p-3 mb-4 text-sm text-gray-700 placeholder-gray-500 border-2 border-[#9CA986] rounded-lg focus:ring-[#5F6F65] focus:border-[#5F6F65] focus:outline-none"
                     />
                     <button
