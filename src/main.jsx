@@ -6,7 +6,6 @@ import axios from 'axios'
 
 let authToken = JSON.parse(localStorage.getItem('authToken'))
 axios.interceptors.request.use((request)=>{
-  console.log(request,'lllllllllllllllll');
  if (authToken){
     request.headers.Authorization = `Bearer ${authToken}`
   }
