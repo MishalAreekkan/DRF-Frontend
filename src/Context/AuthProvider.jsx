@@ -26,14 +26,13 @@ function AuthProvider({ children }) {
             })
             if (response.status === 200) {
                 const data = response.data;
-                console.log(data, "dataaaaaaaaaaa");
                 setAuthToken(data.access);
                 setUser(jwtDecode(data.access));
                 localStorage.setItem('authToken', JSON.stringify(data.access));
                 localStorage.setItem('refreshToken', JSON.stringify(data.refresh));
                 toast.success('successfully logged in')
                 if (jwtDecode(data.access).is_superuser) {
-                    console.log(jwtDecode(data.access), 'jjjjjjjjjjjjjjjjjjjjjj');
+                    console.log(jwtDecode(data.access));
                     nav('home');
                 } else {
                     nav('employee')
