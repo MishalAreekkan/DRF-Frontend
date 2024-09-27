@@ -45,7 +45,6 @@ function Employee() {
     }
   };
   const handleSubmit = async (e) => {
-
     e.preventDefault();
     const formData = new FormData();
     formData.append('first_name', form.first_name);
@@ -108,7 +107,6 @@ function Employee() {
                 name="first_name"
                 value={form.first_name}
                 onChange={handleChange}
-                required
               />
 
               <input
